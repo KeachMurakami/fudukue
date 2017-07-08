@@ -1,0 +1,83 @@
+---
+output:
+  md_document:
+    variant: markdown_github
+---
+
+<!-- README.md is generated from README.Rmd. Please edit that file -->
+
+```{r, echo = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>",
+  fig.path = "README-"
+)
+```
+
+# fudukue (文机)
+
+`fukudue` is a R package developed to support literate programming with R mainly for the author.
+This package will be used in conjunction with [`knitr`]() and [`bookdown`]().
+
+
+## Installation
+
+You can install:
+
+* the latest development version from github with
+
+```R
+# install.packages("devtools") # if not installed
+devtools::install_github("KeachMurakami/fudukue")
+```
+
+
+## How to use
+
+### consistent cross-references displayed in .pfd and .docx
+
+- [demo](https://github.com/KeachMurakami/fudukue/demo/cross-reference)
+
+`fudukue` implements the following verbs for generate consistent cross-reference both in .pdf and .docx (described in reference_switch.R).
+
+* `initialize_ref()`
+    * setup lookup table
+
+* `update_ref()`
+    * add id to newly called object.
+
+* `ref_eqn(), ref_fig(), ref_table()`
+    * generate continuous numbering from the given id.
+
+```{r demo_crossref}
+library(fudukue)
+library(tidyverse)
+
+initialize_ref(list_name = "fig", max_object_num = 5)
+
+# fig 1
+plot(1:10)
+
+update_ref(id = "one2ten", list_name = "fig")
+
+# fig 2
+hist(rnorm(200, 0, 1))
+
+update_ref(id = "hist", list_name = "fig")
+
+
+# for latex output
+out_type <- "latex"
+ref_fig(id = "hist", prefix = "Fig. ")
+
+# for docx output
+out_type <- "docx"
+ref_fig(id = "hist", prefix = "Fig. ")
+```
+
+
+## Session information
+
+```{r sessioninfo}
+devtools::session_info()
+```
