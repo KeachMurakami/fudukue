@@ -38,42 +38,35 @@ devtools::install_github("KeachMurakami/fudukue")
 
 - [demo](https://github.com/KeachMurakami/fudukue/tree/master/demo/cross-reference)
 
-`fudukue` implements the following verbs for generate consistent cross-reference both in .pdf and .docx (described in reference_switch.R).
+`fudukue` implements the following verbs for generating consistent cross-reference both in .pdf and .docx (described in reference_switch.R).
 
 * `initialize_ref()`
-    * setup lookup table
+    * setups lookup table.
 
 * `update_ref()`
-    * add id to newly called object.
+    * adds id to newly called object.
 
 * `ref_eqn(), ref_fig(), ref_table()`
     * generate continuous numbering from the given id.
 
-```{r demo_crossref}
-library(fudukue)
-library(tidyverse)
-
-initialize_ref(list_name = "fig", max_object_num = 5)
-
-# fig 1
-plot(1:10)
-
-update_ref(id = "one2ten", list_name = "fig")
-
-# fig 2
-hist(rnorm(200, 0, 1))
-
-update_ref(id = "hist", list_name = "fig")
 
 
-# for latex output
-out_type <- "latex"
-ref_fig(id = "hist", prefix = "Fig. ")
+### citation managements
 
-# for docx output
-out_type <- "docx"
-ref_fig(id = "hist", prefix = "Fig. ")
-```
+`fudukue` implements the following verbs for updating bibtex-style references.
+`.bib` files for respective articles are stored as `bibtex/list_bib/***.bib`
+
+* `update_cite()`
+    * calls `update_abbrv()` and `update_bib()`.
+
+* `update_abbrv()`
+    * loads abbreviation lists (.csv) and generates `abbrev_XXX.bib` files required for `update_bib()`.
+
+* `update_bib()`
+    * merges all bibtex files into three files.
+        - `Full.bib`: **non-abbreviated** full-length titles
+        - `With.bib`: abbreviated titles **with periods**
+        - `Without.bib`: abbreviated titles **without periods**
 
 
 ## Session information
