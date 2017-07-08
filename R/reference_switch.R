@@ -58,7 +58,7 @@ ref_table <-
         stringr::str_c(., collapse = ",") %>%
         paste0(prefix,  .)
     } else if(out_type == "latex"){
-      paste0("\\ref{fig:", id, "}") %>%
+      paste0("\\ref{table:", id, "}") %>%
         stringr::str_c(., collapse = ",") %>%
         paste0(prefix, .)
     }
