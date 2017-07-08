@@ -21,7 +21,7 @@ How to use
 
 ### consistent cross-references displayed in .pfd and .docx
 
--   [demo](https://github.com/KeachMurakami/fudukue/demo/cross-reference)
+-   [demo](https://github.com/KeachMurakami/fudukue/tree/master/demo/cross-reference)
 
 `fudukue` implements the following verbs for generate consistent cross-reference both in .pdf and .docx (described in reference\_switch.R).
 
