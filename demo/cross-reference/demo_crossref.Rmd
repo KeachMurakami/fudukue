@@ -1,0 +1,61 @@
+---
+title: "demo_crossref"
+output:
+  bookdown::word_document2:
+    toc: FALSE
+  pdf_document:
+    toc: FALSE
+---
+
+```{r load}
+library(knitr)
+library(tidyverse)
+library(fudukue)
+
+out_type <- knitr::opts_knit$get("rmarkdown.pandoc.to")
+
+initialize_ref(list_name = "fig", max_object_num = 5)
+initialize_ref(list_name = "eqn", max_object_num = 5)
+```
+
+# Analyses section
+
+\begin{equation}
+  f(x) = \dfrac{1}{\sqrt{2 \pi \sigma^2}}\exp({- \dfrac{(x - \mu)^2}{2 \sigma^2}})
+  `r if(out_type == "latex") "%"` (\#eq:eqn1)
+  `r if(out_type == "docx") "%"` \label{eq:eqn1}
+\end{equation}
+
+`r update_ref(id = "normal_dist", list_name = "eqn")`
+
+
+```{r fig1, fig.cap = "\\label{fig:plot}Normally distributed values."}
+n01 <- rnorm(100, 0, 1)
+
+plot(n01)
+```
+
+`r update_ref(id = "plot", list_name = "fig")`
+
+```{r fig2, fig.cap = "\\label{fig:hist}Histogram of normally distributed values."}
+hist(n01)
+```
+
+`r update_ref(id = "hist", list_name = "fig")`
+
+
+# Reporting section
+
+- An equation can be cited in the manuscript as follows:
+
+`r ref_eqn(id = "normal_dist", prefix = "Eqn. ")` shows the probability density of the normal distribution.
+
+- A figure can be cited in the manuscript as follows:
+
+`r ref_fig(id = "plot", prefix = "Fig. ")` shows normally distributed 100 values, and `r ref_fig(id = "hist", prefix = "Fig. ")` is a histogram of them.
+One can cite plural figures by `r ref_fig(id = c("plot", "hist"), prefix = "Figs. ")`.
+
+
+```{r, eval = FALSE}
+rmarkdown::render(input = "demo/cross-reference/demo_crossref.Rmd", "all")
+```
