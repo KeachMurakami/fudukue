@@ -37,8 +37,8 @@ update_abbrv <-
   }
 
 update_cite <-
-  function(){
-    update_bib()
-    update_abbrv()
+  function(...){
+    update_abbrv(...)
+    update_bib(...)
   }
 
