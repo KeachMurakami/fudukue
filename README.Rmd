@@ -34,6 +34,20 @@ devtools::install_github("KeachMurakami/fudukue")
 
 ## How to use
 
+### functions for routine operations
+
+following functions are automatically globalized when this package is attached.
+
+* `length2`, `sum2`, `sd2`, `mean2`
+    * `na.rm = T` versions
+
+* `se`
+    * calculates a non-biased standard error
+    
+* `%!in%` (binary operator)
+    * `a %!in% b` returns `!(a %in% b)`
+
+
 ### consistent cross-references displayed in .pfd and .docx
 
 - [demo](https://github.com/KeachMurakami/fudukue/tree/master/demo/cross-reference)
