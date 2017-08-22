@@ -19,6 +19,17 @@ devtools::install_github("KeachMurakami/fudukue")
 How to use
 ----------
 
+### functions for routine operations
+
+following functions are automatically globalized when this package is attached.
+
+-   `length2`, `sum2`, `sd2`, `mean2`
+    -   `na.rm = T` versions
+-   `se`
+    -   calculates a non-biased standard error
+-   `%!in%` (binary operator)
+    -   `a %!in% b` returns `!(a %in% b)`
+
 ### consistent cross-references displayed in .pfd and .docx
 
 -   [demo](https://github.com/KeachMurakami/fudukue/tree/master/demo/cross-reference)
@@ -59,22 +70,22 @@ devtools::session_info()
 #>  language (EN)                        
 #>  collate  en_US.UTF-8                 
 #>  tz       Asia/Tokyo                  
-#>  date     2017-07-08
+#>  date     2017-08-22
 #> Packages ------------------------------------------------------------------
-#>  package   * version date       source         
-#>  backports   1.0.4   2016-10-24 cran (@1.0.4)  
-#>  devtools    1.12.0  2016-06-24 CRAN (R 3.3.0) 
-#>  digest      0.6.11  2017-01-03 cran (@0.6.11) 
-#>  evaluate    0.10    2016-10-11 cran (@0.10)   
-#>  htmltools   0.3.5   2016-03-21 CRAN (R 3.3.1) 
-#>  knitr       1.15.1  2016-11-22 cran (@1.15.1) 
-#>  magrittr    1.5     2014-11-22 CRAN (R 3.3.1) 
-#>  memoise     1.0.0   2016-01-29 CRAN (R 3.3.1) 
-#>  Rcpp        0.12.11 2017-05-22 cran (@0.12.11)
-#>  rmarkdown   1.3     2016-12-21 cran (@1.3)    
-#>  rprojroot   1.2     2017-01-16 cran (@1.2)    
-#>  stringi     1.1.2   2016-10-01 cran (@1.1.2)  
-#>  stringr     1.2.0   2017-02-18 cran (@1.2.0)  
-#>  withr       1.0.2   2016-06-20 CRAN (R 3.3.1) 
+#>  package   * version date       source                          
+#>  backports   1.0.4   2016-10-24 cran (@1.0.4)                   
+#>  devtools    1.12.0  2016-06-24 CRAN (R 3.3.0)                  
+#>  digest      0.6.12  2017-01-27 cran (@0.6.12)                  
+#>  evaluate    0.10.1  2017-06-24 cran (@0.10.1)                  
+#>  htmltools   0.3.6   2017-04-28 cran (@0.3.6)                   
+#>  knitr       1.16    2017-05-18 cran (@1.16)                    
+#>  magrittr    1.5     2014-11-22 CRAN (R 3.3.1)                  
+#>  memoise     1.0.0   2016-01-29 CRAN (R 3.3.1)                  
+#>  Rcpp        0.12.12 2017-07-15 cran (@0.12.12)                 
+#>  rmarkdown   1.6     2017-06-15 cran (@1.6)                     
+#>  rprojroot   1.2     2017-01-16 cran (@1.2)                     
+#>  stringi     1.1.5   2017-04-07 cran (@1.1.5)                   
+#>  stringr     1.2.0   2017-02-18 cran (@1.2.0)                   
+#>  withr       2.0.0   2017-08-08 Github (jimhester/withr@190d293)
 #>  yaml        2.1.14  2016-11-12 cran (@2.1.14)
 ```
