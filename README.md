@@ -2,7 +2,7 @@
 fudukue (文机)
 ==============
 
-`fukudue` is a R package developed to support literate programming with R mainly for the author. This package will be used in conjunction with [`knitr`]() and [`bookdown`]().
+`fukudue` is a collection of R packages developed to support literate programming with R mainly for the author. This package will be used in conjunction with [`tidyverse`](), [`knitr`]() and [`bookdown`]().
 
 Installation
 ------------
@@ -70,7 +70,7 @@ devtools::session_info()
 #>  language (EN)                        
 #>  collate  en_US.UTF-8                 
 #>  tz       Asia/Tokyo                  
-#>  date     2017-08-22
+#>  date     2017-12-11
 #> Packages ------------------------------------------------------------------
 #>  package   * version date       source                          
 #>  backports   1.0.4   2016-10-24 cran (@1.0.4)                   
@@ -78,11 +78,11 @@ devtools::session_info()
 #>  digest      0.6.12  2017-01-27 cran (@0.6.12)                  
 #>  evaluate    0.10.1  2017-06-24 cran (@0.10.1)                  
 #>  htmltools   0.3.6   2017-04-28 cran (@0.3.6)                   
-#>  knitr       1.16    2017-05-18 cran (@1.16)                    
+#>  knitr       1.17    2017-08-10 cran (@1.17)                    
 #>  magrittr    1.5     2014-11-22 CRAN (R 3.3.1)                  
 #>  memoise     1.0.0   2016-01-29 CRAN (R 3.3.1)                  
-#>  Rcpp        0.12.12 2017-07-15 cran (@0.12.12)                 
-#>  rmarkdown   1.6     2017-06-15 cran (@1.6)                     
+#>  Rcpp        0.12.14 2017-11-23 cran (@0.12.14)                 
+#>  rmarkdown   1.6     2017-06-15 CRAN (R 3.3.2)                  
 #>  rprojroot   1.2     2017-01-16 cran (@1.2)                     
 #>  stringi     1.1.5   2017-04-07 cran (@1.1.5)                   
 #>  stringr     1.2.0   2017-02-18 cran (@1.2.0)                   

@@ -16,8 +16,8 @@ knitr::opts_chunk$set(
 
 # fudukue (文机)
 
-`fukudue` is a R package developed to support literate programming with R mainly for the author.
-This package will be used in conjunction with [`knitr`]() and [`bookdown`]().
+`fukudue` is a collection of R packages developed to support literate programming with R mainly for the author.
+This package will be used in conjunction with [`tidyverse`](), [`knitr`]() and [`bookdown`]().
 
 
 ## Installation
