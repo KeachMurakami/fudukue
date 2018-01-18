@@ -4,6 +4,27 @@ initialize_ref <-
     assign(paste0("list_", list_name), list(list_objects), envir = globalenv())
   }
 
+initialize_refs <-
+  function(){
+    out_type <<- opts_knit$get("rmarkdown.pandoc.to")
+    initialize_ref(list_name = "fig")
+    initialize_ref(list_name = "eqn")
+    initialize_ref(list_name = "table")
+  }
+
+set_label <-
+  function(){
+    eqn_num <-
+      list_eqn[[1]] %>%
+      {. != ""} %>%
+      c(., T) %>%
+      sum
+
+    if_else(out_type == "docx",
+            paste0("(\\#eq:eqn", eqn_num, ")"),
+            paste0("\\label{eq:eqn", eqn_num, "}"))
+  }
+
 update_ref <-
   function(id = "", list_name){
     list_objects <-
