@@ -5,11 +5,11 @@ initialize_ref <-
   }
 
 initialize_refs <-
-  function(){
+  function(...){
     out_type <<- opts_knit$get("rmarkdown.pandoc.to")
-    initialize_ref(list_name = "fig")
-    initialize_ref(list_name = "eqn")
-    initialize_ref(list_name = "table")
+    initialize_ref(list_name = "fig", ...)
+    initialize_ref(list_name = "eqn", ...)
+    initialize_ref(list_name = "table", ...)
   }
 
 set_label <-
