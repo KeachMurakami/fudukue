@@ -17,7 +17,7 @@ knitr::opts_chunk$set(
 # fudukue (文机)
 
 `fukudue` is a collection of R packages developed to support literate programming with R mainly for the author.
-This package will be used in conjunction with [`tidyverse`](), [`knitr`]() and [`bookdown`]().
+This package will be used in conjunction with [`tidyverse`]() and [`knitr`]().
 
 
 ## Installation
@@ -26,7 +26,7 @@ You can install:
 
 * the latest development version from github with
 
-```R
+```
 # install.packages("devtools") # if not installed
 devtools::install_github("KeachMurakami/fudukue")
 ```
@@ -48,11 +48,11 @@ following functions are automatically globalized when this package is attached.
     * `a %!in% b` returns `!(a %in% b)`
 
 
-### consistent cross-references displayed in .pfd and .docx
+### consistent cross-references .pfd and .docx
 
 - [demo](https://github.com/KeachMurakami/fudukue/tree/master/demo/cross-reference)
 
-`fudukue` implements the following verbs for generating consistent cross-reference both in .pdf and .docx (described in reference_switch.R).
+`fudukue` implements the following verbs to generate consistent cross-references both in .pdf and .docx (described in `reference_switch.R`).
 
 * `initialize_ref()`
     * setups lookup table.
@@ -67,7 +67,7 @@ following functions are automatically globalized when this package is attached.
 
 ### citation managements
 
-`fudukue` implements the following verbs for updating bibtex-style references.
+`fudukue` implements the following verbs to manage bibtex-style references.
 `.bib` files for respective articles are stored as `bibtex/list_bib/***.bib`
 
 * `update_cite()`
