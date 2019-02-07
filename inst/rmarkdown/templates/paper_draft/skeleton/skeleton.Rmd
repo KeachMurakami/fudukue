@@ -1,0 +1,255 @@
+---
+bibliography: 
+csl: 
+header-includes:
+  - \usepackage{zxjatype} # use Japanese characters
+  - \setjamainfont{Hiragino Mincho Pro} # set Japanese font
+  - \setmainfont{Times}
+  - \usepackage{setspace, lineno, color, fouriernc, fancyhdr, lscape, multirow, booktabs, threeparttable, caption}
+  - \setlength\parskip{0pt} # set space between paragraph
+output:
+  pdf_document:
+    latex_engine: xelatex
+    fig_caption: TRUE
+    number_sections: FALSE
+  # html_document:
+  #   theme: sandstone
+  #   self_contained: TRUE
+  #   fig_caption: TRUE
+  # bookdown::word_document2:
+  #   fig_caption: TRUE
+  #   pandoc_args: [
+  #     "--mathml"
+  #   ]
+---
+
+```{r generate_structure}
+# setwd and ctrl+Enter
+# should be removed
+dir.create(path = "/data")
+dir.create(path = "/souorces")
+dir.create(path = "/figures")
+
+file.create("abstract")
+file.create("main.Rmd")
+file.create("sup.Rmd")
+file.create("fig.Rmd")
+```
+
+\pagestyle{empty}
+
+```{r setup, echo = FALSE, message = FALSE, warning = FALSE}
+rm(list = ls())
+
+library(tidyverse)
+library(fudukue)
+extrafont::loadfonts()
+
+opts_chunk$set(fig.width = 5, fig.height = 7, dpi = 2000,
+               echo = FALSE, message = FALSE, warning = FALSE, cache = FALSE, eval = TRUE)
+```
+
+# Session information
+
+```{r}
+devtools::session_info()
+```
+
+```{r document_style}
+eval_fig <- FALSE
+update_data <- FALSE
+
+initialize_refs()
+
+eqn_prefix <- c("Eq. ", "Eqs. ")
+fig_prefix <- c("Fig. ", "Figs. ")
+table_prefix <- c("Table", "Tables")
+
+double_width <-  (166 / 25.4) %>% round(., 1)
+mid_width <- (125 / 25.4) %>% round(., 1)
+single_width <-  (80 / 25.4) %>% round(., 1)
+```
+
+```{r general_info}
+TITLE <-
+  "TITLE"
+
+RUNNING_TITLE <-
+  "SHORT TITLE"
+
+AUTHORS <-
+  lst(
+    lst(name = "Keach Murakami", affiliation = c(1, 2), role = "Crsp", email = "keach.murakami@gmail.com"),
+    lst(name = "Aaa Bbb", affiliation = c(2), role = ""),
+    lst(name = "XXX YYY", affiliation = c(3), role = ""),
+    lst(name = "Abc Def", affiliation = c(3), role = "Crsp", email = "HIS/HER EMAIL")
+  )
+
+AFFILIATIONS <-
+  list(
+    `1` = "Division of Plant Sciences, Research School of Biology, The Australian National University",
+    `2` = "Graduate School of Sciences and Technology for Innovation, Yamaguchi University",
+    `3` = "Graduate School of Science, XXX University"
+  )
+
+ADDRESSES <-
+  lst(
+    `1` = "Acton, ACT 2601, Australia",
+    `2` = "Yoshida 1677–1, Yamaguchi 753–8515, Japan",
+    `3` = "Somewhere"
+  )
+
+
+generate_author_list <-
+  function(list_authors = AUTHORS){
+    
+    per_author <-
+      function(lst){
+        author_record <- str_glue("{lst[[1]]}^{str_c(lst[[2]], collapse = ',')}")
+        if_else(lst[[3]] == "Crsp", str_c(author_record, ",\\*^"), str_c(author_record, "^"))
+      }
+    
+    list_authors %>%
+      map(per_author) %>%
+      str_c(collapse = ", ")
+  }
+
+generate_affiliation_list <-
+  function(list_affiliations = AFFILIATIONS){
+    list_affiliations %>%
+      imap(~ str_glue("^{.y}^{.x}")) %>%
+      str_c(collapse = "; ")
+  }
+
+generate_corredponding_list <-
+  function(list_authors = AUTHORS){
+    list_authors %>%
+      map_if(~ .[3] != "Crsp", ~ list("", "", "", "")) %>%
+      map(~ str_glue("{.[1]}: {.[4]}")) %>%
+      str_c(collapse = "; ") %>%
+      str_replace_all(": ; ", "")
+  }
+```
+
+```{r load_sources}
+dir("sources", full.names = TRUE) %>% walk(source)
+```
+
+```{r eval = !exists("out_type")}
+ref_fig <- function(...) "FIGURE"
+ref_table <- function(...) "TABLE"
+ref_eqn <- function(...) "EQUATION"
+```
+
+\newpage
+\setstretch{2}
+\large
+
+# Title & Authors
+
+- Title:
+    - `r TITLE`
+- Authors:
+    - `r generate_author_list(AUTHORS)`
+- Affiliation:
+    - `r generate_affiliation_list(AFFILIATIONS)`
+- Address:
+    - `r generate_affiliation_list(ADDRESSES)`
+- Corresponding authors:
+    - `r generate_corredponding_list(AUTHORS)`
+- Running title:
+    - `r RUNNING_TITLE`
+
+
+```{r draw_figure, child="fig.Rmd"}
+```
+
+```{r embed_fonts}
+dir("figures/", full.names = T) %>%
+  map(embed_fonts, options = "-c \"<</NeverEmbed []>> setdistillerparams\" -f ")
+```
+
+\newpage
+\linenumbers
+
+**Abstract** (< 200 words)
+
+```{r abstract, child="abstract.rmd"}
+```
+
+**Keywords**
+
+Cytochrome *b*~6~*f*,
+Photosynthetic acclimation,
+Reversibility of photosynthesis,
+Fluctuating light
+
+
+**Abbreviations**
+
+cyt-bf: cytochrome *b*~6~*f* complex,
+*C*~i~: intercellular CO~2~ partial pressure,
+*g*~s~: stomatal conductance,
+LMA: leaf mass per area,
+*P*~max~: maximum photosynthetic O~2~ evolution rate,
+*P*~n~: net photosynthetic CO~2~ fixation rate,
+PSII: photosystem II
+
+
+\newpage
+\pagestyle{plain}
+\setcounter{page}{1}
+\setlength\parindent{12 pt}
+\captionsetup[figure]{name={`r fig_prefix[1]`}, labelsep=space, font={normal,stretch=2.5}}
+\captionsetup[table]{name={`r table_prefix[1]`}, labelsep=space, font={normal,stretch=2.5}}
+
+```{r main, child = "main.Rmd"}
+```
+
+\newpage  
+\noindent  
+**Author contributions**  
+K.M. designed the study, conducted experiments, analysed data and wrote the manuscript.
+M.R.B. supervised MIMS measurements and made critical revision of the manuscript.
+W.S.C. designed the study and wrote the manuscript.
+
+\noindent  
+**Disclosures**  
+The authors have no conflicts of interest to declare.
+
+\noindent  
+**Acknowledgements**  
+The authors are grateful to Prof. John Evans for valuable discussion, to Prof. Graham Farquhar and Prof. Marilyn Ball for letting us use their experimental devices, and to Christine Larsen and Steven Dempsey for plant maintenance.
+This work was supported by JSPS KAKENHI (Grant Number 17J04736 to K.M.).
+
+\newpage
+\noindent
+\setcounter{page}{1}
+\pagestyle{fancy}
+\fancyhf{}
+\rhead{`r RUNNING_TITLE` | `r str_extract(AUTHORS[[1]][[1]], ' .*')`}
+\fancyfoot[C]{Sup.~\thepage~}
+
+```{r supplemental, child = "sup.Rmd"}
+```
+
+
+\newpage
+\setcounter{page}{1}
+\pagestyle{fancy}
+\fancyhf{}
+\rhead{Captions}
+\fancyfoot[C]{C~\thepage~}
+
+\listoffigures
+
+\newpage
+\setcounter{page}{1}
+\pagestyle{fancy}
+\fancyhf{}
+\rhead{References}
+\fancyfoot[C]{R~\thepage~}
+
+\setlength\parindent{12pt}
+
+# References
