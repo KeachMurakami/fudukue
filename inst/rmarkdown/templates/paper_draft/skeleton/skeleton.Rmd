@@ -24,12 +24,10 @@ output:
 ---
 
 ```{r generate_structure}
-# setwd and ctrl+Enter
-# should be removed
-dir.create(path = "/data")
-dir.create(path = "/souorces")
-dir.create(path = "/figures")
-
+# setwd -> ctrl+shift+enter -> remove this chunk
+dir.create(path = "data")
+dir.create(path = "souorces")
+dir.create(path = "figures")
 file.create("abstract")
 file.create("main.Rmd")
 file.create("sup.Rmd")
