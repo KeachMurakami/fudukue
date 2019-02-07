@@ -23,7 +23,7 @@ output:
   #   ]
 ---
 
-```{r generate_structure}
+```{r generate_structure, eval = FALSE}
 # setwd -> ctrl+shift+enter -> remove this chunk
 dir.create(path = "data")
 dir.create(path = "souorces")
@@ -58,6 +58,9 @@ eval_fig <- FALSE
 update_data <- FALSE
 
 initialize_refs()
+
+eval_fig <-
+  if_else(out_type != "docx", T, F)
 
 eqn_prefix <- c("Eq. ", "Eqs. ")
 fig_prefix <- c("Fig. ", "Figs. ")
@@ -97,14 +100,19 @@ ADDRESSES <-
     `3` = "Somewhere"
   )
 
-
 generate_author_list <-
-  function(list_authors = AUTHORS){
+  function(list_authors = AUTHORS, superscripts = TRUE){
     
     per_author <-
-      function(lst){
-        author_record <- str_glue("{lst[[1]]}^{str_c(lst[[2]], collapse = ',')}")
-        if_else(lst[[3]] == "Crsp", str_c(author_record, ",\\*^"), str_c(author_record, "^"))
+      if(superscripts){
+        function(lst){
+          author_record <- str_glue("{lst[[1]]}^{str_c(lst[[2]], collapse = ',')}")
+          if_else(lst[[3]] == "Crsp", str_c(author_record, ",\\*^"), str_c(author_record, "^"))
+        }
+      } else {
+        function(lst){
+          author_record <- lst[[1]]
+        }
       }
     
     list_authors %>%
@@ -159,10 +167,10 @@ ref_eqn <- function(...) "EQUATION"
     - `r RUNNING_TITLE`
 
 
-```{r draw_figure, child="fig.Rmd"}
+```{r draw_figure, child="fig.Rmd", eval = FALSE}
 ```
 
-```{r embed_fonts}
+```{r embed_fonts, eval = FALSE}
 dir("figures/", full.names = T) %>%
   map(embed_fonts, options = "-c \"<</NeverEmbed []>> setdistillerparams\" -f ")
 ```
@@ -177,21 +185,11 @@ dir("figures/", full.names = T) %>%
 
 **Keywords**
 
-Cytochrome *b*~6~*f*,
-Photosynthetic acclimation,
-Reversibility of photosynthesis,
-Fluctuating light
-
-
 **Abbreviations**
 
-cyt-bf: cytochrome *b*~6~*f* complex,
-*C*~i~: intercellular CO~2~ partial pressure,
-*g*~s~: stomatal conductance,
-LMA: leaf mass per area,
-*P*~max~: maximum photosynthetic O~2~ evolution rate,
-*P*~n~: net photosynthetic CO~2~ fixation rate,
-PSII: photosystem II
+
+
+
 
 
 \newpage
@@ -207,25 +205,19 @@ PSII: photosystem II
 \newpage  
 \noindent  
 **Author contributions**  
-K.M. designed the study, conducted experiments, analysed data and wrote the manuscript.
-M.R.B. supervised MIMS measurements and made critical revision of the manuscript.
-W.S.C. designed the study and wrote the manuscript.
 
 \noindent  
 **Disclosures**  
-The authors have no conflicts of interest to declare.
 
 \noindent  
 **Acknowledgements**  
-The authors are grateful to Prof. John Evans for valuable discussion, to Prof. Graham Farquhar and Prof. Marilyn Ball for letting us use their experimental devices, and to Christine Larsen and Steven Dempsey for plant maintenance.
-This work was supported by JSPS KAKENHI (Grant Number 17J04736 to K.M.).
 
 \newpage
 \noindent
 \setcounter{page}{1}
 \pagestyle{fancy}
 \fancyhf{}
-\rhead{`r RUNNING_TITLE` | `r str_extract(AUTHORS[[1]][[1]], ' .*')`}
+\rhead{`r RUNNING_TITLE` | `r str_extract(AUTHORS[[1]][[1]], ' .*')` et al.}
 \fancyfoot[C]{Sup.~\thepage~}
 
 ```{r supplemental, child = "sup.Rmd"}

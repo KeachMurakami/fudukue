@@ -1,0 +1,57 @@
+# Introduction
+
+Write your introduction before starting expriments!
+
+
+
+# Materials and Methods
+
+You can write this section between your expriments.
+Why not?
+
+## Plant materials
+
+## Model
+
+First order reaction is expressed as follows
+
+\begin{equation}
+\dfrac{dy}{dt} = -k_d y,
+`r set_label()`
+\end{equation}
+`r update_ref(id = "first_order", list_name = "eqn")`
+
+where *k*~d~ is a rate coefficient for the decay. 
+(`r ref_eqn("first_order", eqn_prefix[1])`).
+
+## Statistical analysis
+
+
+
+# Results
+
+Mention your data simply and carefully.
+
+## Some result
+
+```{r, fig.cap = "\\label{fig:sample}This is a caption for a scatter plot."}
+mtcars %>%
+  ggplot(aes(mpg, cyl, col = factor(am))) +
+  geom_point()
+```
+
+`r update_ref("sample", list_name = "fig")`
+
+\newpage
+
+There was a negative correlation between `mpg` and `cyl` (`r ref_fig("sample", fig_prefix[1])`).
+
+
+
+# Discussion
+
+The most important section.
+
+## high mpg decrease cyl?
+
+Blur blur. Hoge hoge.

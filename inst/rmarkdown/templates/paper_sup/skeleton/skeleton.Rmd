@@ -1,0 +1,33 @@
+\setcounter{table}{0}
+\setcounter{figure}{0}
+\renewcommand{\thefigure}{S\arabic{figure}}
+\renewcommand{\thetable}{S\arabic{table}}
+
+# Supporting Information
+
+\noindent  
+Article title: `r TITLE`  
+Authors: `r generate_author_list(AUTHORS, superscript = FALSE)`  
+The following Supporting Information is available for this article:  
+
+\vspace{.5cm}
+\noindent  
+**Supporting Information `r ref_fig("sup_fig", fig_prefix[1])`**  
+Description for supplemental figure.
+
+\newpage  
+
+\setlength\parindent{24pt}
+\setlength\parindent{0pt}
+\captionsetup[figure]{name={Fig.}, labelsep=space, font={normal,stretch=1.5}}
+
+\newpage  
+
+```{r, fig.cap =  "\\label{fig:sup_fig}This is a caption for supplemental figure.", fig.width = 7, fig.height = 6}
+plot(1:10)
+```
+
+`r update_ref("sup_fig", list_name = "fig")`
+
+\newpage  
+\newpage  
